@@ -14,7 +14,7 @@ function News() {
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=${query}&apiKey=2939fcfa6f0d42bb819f888699cb1f65`
+        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=ROYQ4MgIWvG1rJLuTMt8QVCTG9PXw9eD`
       )
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
@@ -29,7 +29,7 @@ function News() {
 
   return (
     <Container>
-      {!md && <Headlines />}
+      {/* {!md && <Headlines />} */}
       {!md && <Divider sx={{ backgroundColor: '#191919' }} />}
       <Box mb={4}>
       <form onSubmit={handleSubmit}>
@@ -50,8 +50,8 @@ function News() {
       {md && <Divider sx={{ backgroundColor: '#191919' }} />}
       </Box>
       <Grid container spacing={2}>
-        {data ? data.articles?.map((article) => (
-        <Grid item xs={12} sm={6} md={4} key={article.url}>
+        {data ? data.response?.docs?.map((article) => (
+        <Grid item xs={12} sm={6} md={4} key={article._id}>
           <NewsArticle article={article} />
         </Grid>
         ))
