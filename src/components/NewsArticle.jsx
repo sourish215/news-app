@@ -2,7 +2,6 @@ import React from 'react'
 import { Card, CardContent, CardMedia, Link, Typography, Divider } from '@mui/material';
 
 function NewsArticle({ article }) {
-  // const event = new Date(article.publishedAt);
   const event = new Date(article.pub_date);
   const date = new Intl.DateTimeFormat('en-IN', { dateStyle: 'full', timeStyle: 'short' }).format(event);
   return (
@@ -11,7 +10,7 @@ function NewsArticle({ article }) {
         component="img"
         alt="image"
         height="140"
-        image={`https://static01.nyt.com/${article.multimedia[0].url}`}
+        image={`https://static01.nyt.com/${article.multimedia[0]?.url}`}
       />
       <CardContent>
         <Typography variant="h6" fontWeight="bold" gutterBottom sx={{

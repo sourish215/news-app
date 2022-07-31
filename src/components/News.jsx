@@ -10,11 +10,11 @@ function News() {
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down('md'));
   const [data, setData] = useState([]);
-  const [query, setQuery] = useState('latest');
+  const [query, setQuery] = useState('today');
   useEffect(() => {
     axios
       .get(
-        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=ROYQ4MgIWvG1rJLuTMt8QVCTG9PXw9eD`
+        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&api-key=ROYQ4MgIWvG1rJLuTMt8QVCTG9PXw9eD`
       )
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
@@ -29,7 +29,7 @@ function News() {
 
   return (
     <Container>
-      {/* {!md && <Headlines />} */}
+      {!md && <Headlines />}
       {!md && <Divider sx={{ backgroundColor: '#191919' }} />}
       <Box mb={4}>
       <form onSubmit={handleSubmit}>

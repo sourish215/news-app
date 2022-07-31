@@ -26,9 +26,9 @@ function Headlines() {
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/top-headlines?country=in&country=us&apiKey=2939fcfa6f0d42bb819f888699cb1f65`
+        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=today&api-key=ROYQ4MgIWvG1rJLuTMt8QVCTG9PXw9eD`
       )
-      .then((response) => setData(response.data.articles))
+      .then((response) => setData(response.data))
       .catch((error) => console.log(error));
   }, []);
 
@@ -38,10 +38,10 @@ function Headlines() {
     <Box mt={2}>
       <Typography variant="h4" fontWeight='bold' align="center" gutterBottom color='#191919'>Today's top headlines</Typography>
         <Slider {...settings}>
-            {data?.map((article) => (
-                <div key={article.url}>
-                  <Link href={article.url} underline='hover' style={{ cursor: 'pointer', color: '#000' }}>
-                    <Typography variant="subtitle1" style={{ marginRight: '30px' }}>{article.title}</Typography>
+            {data.response?.docs?.map((article) => (
+                <div key={article._id}>
+                  <Link href={article.web_url} underline='hover' style={{ cursor: 'pointer', color: '#000' }}>
+                    <Typography variant="subtitle1" style={{ marginRight: '30px' }}>{article.headline.main}</Typography>
                   </Link>
                 </div>
         ))}
